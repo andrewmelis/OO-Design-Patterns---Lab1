@@ -34,15 +34,27 @@ class Component
     component.parent = nil
   end
 
+  #def print_subcomponents
+  #  @sub_components.each do |s|
+  #    puts "#{s}"
+  #  end
+  #end
+
 
   #need to implement with visitor and iterator
   def current_value
     #stuff
   end
 
+
 end
 
 class Composite < Component
+
+  #def to_s
+  #  puts "#{self.name} has subcomponents: "
+  #  print_subcomponents
+  #end
 
   #stuff
 
@@ -51,10 +63,11 @@ end
 #choose to implement these methods in base component class
 #and then override for leaves
 #in my opinion, should be able to call all methods on each class
-class Leaf < Component
+class Security < Component
   def initialize(name)
     @name = name
-    @sub_components = nil
+    @parent = nil
+    @sub_components = nil #can never have subcomponents
   end
 
   def <<(components)
@@ -72,5 +85,12 @@ class Leaf < Component
   def remove(component)
     puts "not allowed for leaves!"
   end
+  
+  def print_subcomponents
+  end
+
+  #def to_s
+  #  puts "#{self.name}"
+  #end
 
 end
