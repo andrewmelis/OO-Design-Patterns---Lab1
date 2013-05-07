@@ -6,10 +6,29 @@ require "./abstract_classes.rb"
 #portfolios made of accounts and other portfolios
 class Portfolio < Composite
 
+  def printPortfolio 
+    puts self.name + " has value of $"+self.current_value.to_s
+    puts "#{self.name} has sub_components: \n"
+    self.sub_components.each do |sc|
+      if sc.is_a? Portfolio
+	sc.printPortfolio
+      else
+	sc.printAccount 
+      end
+    end
+  end
+
 end
 
 #accounts made of stocks, moneymarkets, and bonds
 class Account < Composite
+  def printAccount 
+    puts self.name + " has value of $"+self.current_value.to_s
+    puts "#{self.name} has sub_components: \n"
+    self.sub_components.each do |sc|
+      puts "#{sc.name} | $#{sc.current_value}"
+    end
+  end
 
 end
 

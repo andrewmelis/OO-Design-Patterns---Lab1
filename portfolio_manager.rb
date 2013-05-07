@@ -2,7 +2,7 @@ require './concrete_classes'
 require 'singleton'
 
 class PortfolioManager 
-  #include Singleton
+  include Singleton
 
   attr_accessor :portfolios
   def initialize
@@ -50,42 +50,7 @@ class PortfolioManager
   
     @portfolios << portfolio1
   end
-
-  def printPortfolio portfolio
-    puts portfolio.name + " has value of $"+portfolio.current_value.to_s
-    puts "sub_components: \n"
-    portfolio.sub_components.each do |sc|
-      if sc.is_a? Portfolio
-	printPortfolio sc
-      else
-	printAccount sc
-      end
-    end
-  end
-
-  def printAccount account
-    puts account.name + " has value of $"+account.current_value.to_s
-    puts "sub_components: \n"
-    account.sub_components.each do |sc|
-      puts "#{sc.name} | $#{sc.current_value}"
-    end
-  end
-
+  
 end
 
-####################################
-#NOW TESTING
-#pm = PortfolioManager.instance
-puts "\n"
-pm = PortfolioManager.new
-v = Visitor.new
 
-pm.buildPortfolio_1
-pm.buildPortfolio_2
-
-pm.portfolios.each do |p|
-  p.accept v
-
-  pm.printPortfolio p
-  puts "\n"
-end
