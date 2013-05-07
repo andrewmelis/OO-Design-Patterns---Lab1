@@ -2,10 +2,16 @@
 #OO Arch and Design
 #Lab Deliverable 1 - Accounts and Portfolios
 
+module Visitable
+  def accept visitor
+    visitor.visit self
+  end
+end
 
 #component class, v1
 class Component
-  attr_accessor :name, :parent, :sub_components
+  include Visitable
+  attr_accessor :name, :parent, :sub_components, :current_value
 
   def initialize(name)
     @name = name
@@ -34,29 +40,10 @@ class Component
     component.parent = nil
   end
 
-  #def print_subcomponents
-  #  @sub_components.each do |s|
-  #    puts "#{s}"
-  #  end
-  #end
-
-
-  #need to implement with visitor and iterator
-  def current_value
-    #stuff
-  end
-
-
 end
 
+
 class Composite < Component
-
-  #def to_s
-  #  puts "#{self.name} has subcomponents: "
-  #  print_subcomponents
-  #end
-
-  #stuff
 
 end
 
@@ -86,11 +73,5 @@ class Security < Component
     puts "not allowed for leaves!"
   end
   
-  def print_subcomponents
-  end
-
-  #def to_s
-  #  puts "#{self.name}"
-  #end
-
 end
+
